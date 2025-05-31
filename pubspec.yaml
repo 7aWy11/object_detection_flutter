@@ -1,21 +1,19 @@
 name: object_detection_flutter
 description: A high-performance Flutter package for real-time, multi-model (object detection, classification, pose, face, YOLOv5) vision tasks using TensorFlow Lite with isolate support.
 version: 0.1.0 # Start with a pre-release version like 0.1.0 or 1.0.0-beta.1 if you prefer
-homepage: https://github.com/yourusername/object_detection_flutter # UPDATE THIS
-repository: https://github.com/yourusername/object_detection_flutter # Good to add
-issue_tracker: https://github.com/yourusername/object_detection_flutter/issues # Good to add
+homepage: https://github.com/7awy11/object_detection_flutter
+repository: https://github.com/7awy11/object_detection_flutter
+issue_tracker: https://github.com/7awy11/object_detection_flutter/issues
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.10.0" # Consider setting a more recent stable Flutter version if you use newer features. 3.0.0 is fine but older.
-
+  flutter: ">=3.10.0" 
 dependencies:
   flutter:
     sdk: flutter
-  tflite_flutter: ^0.11.0 # Or consider ^0.10.4 if 0.11.0 is newer/less stable for some users initially
+  tflite_flutter: ^0.11.0 
   image: ^4.1.7
-  path_provider: ^2.1.2 # This is used in your Classifier for loading model from assets via temp file.
-
+  path_provider: ^2.1.2 
 dev_dependencies:
   flutter_test:
     sdk: flutter

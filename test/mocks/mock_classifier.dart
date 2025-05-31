@@ -130,4 +130,58 @@ class MockClassifier implements ModelClassifier {
   Uint8List preprocessImage(imageLib.Image image) {
     return Uint8List.fromList([1, 2, 3, 4]);
   }
+
+  @override
+  ModelType get modelType => ModelType.UNKNOWN;
+
+  @override
+  List<List<int>>? get outputShapes => null;
+
+  @override
+  List<int>? get inputTypes => null;
+
+  @override
+  List<int>? get outputTypes => null;
+
+  @override
+  List<int>? get inputShape => null;
+
+  @override
+  List<Recognition> runFaceDetection(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [
+      Recognition(
+        id: 0,
+        label: 'person',
+        score: 0.95,
+        location: const Rect.fromLTWH(100, 100, 200, 300),
+      ),
+    ];
+  }
+
+  @override
+  List<Recognition> runPoseEstimation(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [
+      Recognition(
+        id: 0,
+        label: 'person',
+        score: 0.95,
+        location: const Rect.fromLTWH(100, 100, 200, 300),
+      ),
+    ];
+  }
+
+  @override
+  List<Recognition> runSegmentation(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [
+      Recognition(
+        id: 0,
+        label: 'person',
+        score: 0.95,
+        location: const Rect.fromLTWH(100, 100, 200, 300),
+      ),
+    ];
+  }
 }

@@ -18,12 +18,29 @@ class MockModelClassifier implements ModelClassifier {
   List<String>? get labels => _labels;
 
   @override
+  ModelType get modelType => ModelType.UNKNOWN;
+
+  @override
+  List<List<int>>? get outputShapes => null;
+
+  @override
+  List<int>? get inputTypes => null;
+
+  @override
+  List<int>? get outputTypes => null;
+
+  @override
+  List<int>? get inputShape => null;
+
+  @override
   Future<void> loadModel({String? modelPath}) async {
+    if (modelPath == 'invalid') throw Exception('Invalid model path');
     _interpreter = null; // Mock interpreter
   }
 
   @override
   Future<void> loadLabels({String? labelsPath}) async {
+    if (labelsPath == 'invalid') throw Exception('Invalid labels path');
     _labels = ['person', 'car', 'dog'];
   }
 
@@ -34,6 +51,7 @@ class MockModelClassifier implements ModelClassifier {
 
   @override
   Map<String, dynamic> predict(imageLib.Image image) {
+    if (_labels == null) throw Exception('Labels not loaded');
     return {
       "recognitions": <Recognition>[],
       "stats": Stats(
@@ -58,6 +76,24 @@ class MockModelClassifier implements ModelClassifier {
 
   @override
   List<Recognition> runYolov5Detection(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [];
+  }
+
+  @override
+  List<Recognition> runFaceDetection(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [];
+  }
+
+  @override
+  List<Recognition> runPoseEstimation(
+      Uint8List inputBuffer, imageLib.Image image) {
+    return [];
+  }
+
+  @override
+  List<Recognition> runSegmentation(
       Uint8List inputBuffer, imageLib.Image image) {
     return [];
   }
@@ -148,6 +184,24 @@ void main() {
     test('Close', () {
       classifier.close();
       expect(classifier.interpreter, null);
+    });
+
+    test('Predict throws if labels not loaded', () {
+      final classifier = MockModelClassifier();
+      final image = imageLib.Image(width: 100, height: 100);
+      expect(() => classifier.predict(image), throwsA(isA<Exception>()));
+    });
+
+    test('loadModel throws on invalid path', () async {
+      final classifier = MockModelClassifier();
+      expect(() => classifier.loadModel(modelPath: 'invalid'),
+          throwsA(isA<Exception>()));
+    });
+
+    test('loadLabels throws on invalid path', () async {
+      final classifier = MockModelClassifier();
+      expect(() => classifier.loadLabels(labelsPath: 'invalid'),
+          throwsA(isA<Exception>()));
     });
   });
 }

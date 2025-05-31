@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:image/image.dart' as imageLib;
 import 'recognition.dart';
-import 'stats.dart';
 
 /// Enum to identify different model types
 enum ModelType {

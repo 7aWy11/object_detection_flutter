@@ -22,4 +22,19 @@ class Stats {
   String toString() {
     return 'Stats(totalPredictTime: $totalPredictTime, inferenceTime: $inferenceTime, preProcessingTime: $preProcessingTime, totalElapsedTime: $totalElapsedTime)';
   }
+
+  Stats copyWith({
+    int? totalPredictTime,
+    int? inferenceTime,
+    int? preProcessingTime,
+    int? totalElapsedTime,
+  }) {
+    final stats = Stats(
+      totalPredictTime: totalPredictTime ?? this.totalPredictTime,
+      inferenceTime: inferenceTime ?? this.inferenceTime,
+      preProcessingTime: preProcessingTime ?? this.preProcessingTime,
+    );
+    stats.totalElapsedTime = totalElapsedTime ?? this.totalElapsedTime;
+    return stats;
+  }
 }

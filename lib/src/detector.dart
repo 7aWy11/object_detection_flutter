@@ -2,13 +2,8 @@ import 'dart:async';
 import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-
 import 'classifier.dart';
 import 'recognition.dart';
-import 'stats.dart';
 import 'isolate_utils.dart';
 import 'detector_interface.dart';
 import 'classifier_interface.dart';

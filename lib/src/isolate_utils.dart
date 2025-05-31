@@ -4,7 +4,6 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:image/image.dart' as imageLib;
 import 'classifier.dart';
 import 'recognition.dart';
-import 'stats.dart';
 
 /// Data class for passing information to isolate
 class IsolateData {
@@ -81,7 +80,7 @@ void _isolateEntryPoint(SendPort sendPort) async {
           "error": "Failed to decode image"
         });
       }
-    } catch (e, stackTrace) {
+    } catch (e) {
       isolateData.responsePort.send({
         "recognitions": <Recognition>[],
         "stats": null,

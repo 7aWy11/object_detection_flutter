@@ -20,22 +20,22 @@ class Recognition {
 
   /// Face landmarks (for face detection) - typically 5 points
   final List<Offset>? landmarks;
-  
+
   /// Face landmarks scaled to screen size
   late List<Offset>? renderLandmarks;
-  
+
   /// Human pose keypoints (for pose estimation) - typically 17 COCO keypoints
   final List<Offset>? keypoints;
-  
+
   /// Human pose keypoints scaled to screen size
   late List<Offset>? renderKeypoints;
-  
+
   /// Segmentation mask pixel locations (for segmentation)
   final List<Offset>? segmentationMask;
-  
+
   /// Segmentation mask scaled to screen size
   late List<Offset>? renderSegmentationMask;
-  
+
   /// Additional metadata
   final Map<String, dynamic>? metadata;
 
@@ -120,37 +120,44 @@ class Recognition {
 
     // Update landmarks
     if (landmarks != null) {
-      renderLandmarks = landmarks!.map((landmark) => Offset(
-        landmark.dx * scaleX,
-        landmark.dy * scaleY,
-      )).toList();
+      renderLandmarks = landmarks!
+          .map((landmark) => Offset(
+                landmark.dx * scaleX,
+                landmark.dy * scaleY,
+              ))
+          .toList();
     }
 
     // Update keypoints
     if (keypoints != null) {
-      renderKeypoints = keypoints!.map((keypoint) => Offset(
-        keypoint.dx * scaleX,
-        keypoint.dy * scaleY,
-      )).toList();
+      renderKeypoints = keypoints!
+          .map((keypoint) => Offset(
+                keypoint.dx * scaleX,
+                keypoint.dy * scaleY,
+              ))
+          .toList();
     }
 
     // Update segmentation mask
     if (segmentationMask != null) {
-      renderSegmentationMask = segmentationMask!.map((point) => Offset(
-        point.dx * scaleX,
-        point.dy * scaleY,
-      )).toList();
+      renderSegmentationMask = segmentationMask!
+          .map((point) => Offset(
+                point.dx * scaleX,
+                point.dy * scaleY,
+              ))
+          .toList();
     }
   }
 
   /// Check if this recognition has landmarks
   bool get hasLandmarks => landmarks != null && landmarks!.isNotEmpty;
-  
+
   /// Check if this recognition has keypoints
   bool get hasKeypoints => keypoints != null && keypoints!.isNotEmpty;
-  
+
   /// Check if this recognition has segmentation mask
-  bool get hasSegmentationMask => segmentationMask != null && segmentationMask!.isNotEmpty;
+  bool get hasSegmentationMask =>
+      segmentationMask != null && segmentationMask!.isNotEmpty;
 
   /// Get the area of the bounding box
   double get area => location.width * location.height;
@@ -176,18 +183,24 @@ class Recognition {
         'right': location.right,
         'bottom': location.bottom,
       },
-      'landmarks': landmarks?.map((point) => {
-        'x': point.dx,
-        'y': point.dy,
-      }).toList(),
-      'keypoints': keypoints?.map((point) => {
-        'x': point.dx,
-        'y': point.dy,
-      }).toList(),
-      'segmentationMask': segmentationMask?.map((point) => {
-        'x': point.dx,
-        'y': point.dy,
-      }).toList(),
+      'landmarks': landmarks
+          ?.map((point) => {
+                'x': point.dx,
+                'y': point.dy,
+              })
+          .toList(),
+      'keypoints': keypoints
+          ?.map((point) => {
+                'x': point.dx,
+                'y': point.dy,
+              })
+          .toList(),
+      'segmentationMask': segmentationMask
+          ?.map((point) => {
+                'x': point.dx,
+                'y': point.dy,
+              })
+          .toList(),
       'metadata': metadata,
     };
   }
@@ -195,5 +208,27 @@ class Recognition {
   @override
   String toString() {
     return 'Recognition(id: $id, label: $label, score: ${score.toStringAsFixed(3)}, location: $location)';
+  }
+
+  Recognition copyWith({
+    int? id,
+    String? label,
+    double? score,
+    Rect? location,
+    List<Offset>? landmarks,
+    List<Offset>? keypoints,
+    List<Offset>? segmentationMask,
+    Map<String, dynamic>? metadata,
+  }) {
+    return Recognition(
+      id: id ?? this.id,
+      label: label ?? this.label,
+      score: score ?? this.score,
+      location: location ?? this.location,
+      landmarks: landmarks ?? this.landmarks,
+      keypoints: keypoints ?? this.keypoints,
+      segmentationMask: segmentationMask ?? this.segmentationMask,
+      metadata: metadata ?? this.metadata,
+    );
   }
 }

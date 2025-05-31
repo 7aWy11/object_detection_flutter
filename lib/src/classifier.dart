@@ -5,10 +5,8 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:tflite_flutter/src/tensor.dart';
 import 'package:image/image.dart' as imageLib;
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter/material.dart';
 
 import 'recognition.dart';
 import 'stats.dart';
@@ -211,21 +209,6 @@ class Classifier implements ModelClassifier {
       developer.log("Error loading labels: $e");
       rethrow;
     }
-  }
-
-  /// Extract file from assets to a readable location
-  Future<File> _getFile(String assetPath) async {
-    final byteData = await rootBundle.load(assetPath);
-    final file = File(
-        '${(await getTemporaryDirectory()).path}/${assetPath.split('/').last}');
-    await file.writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return file;
-  }
-
-  /// Public method to extract model information (for testing/analysis)
-  void extractModelInfo() {
-    _extractModelInfo();
   }
 
   /// Get detailed model information as a map (useful for debugging/testing)
@@ -462,13 +445,7 @@ class Classifier implements ModelClassifier {
             buffer[pixelIndex * inputChannels] = (r / 127.5) - 1.0;
             buffer[pixelIndex * inputChannels + 1] = (g / 127.5) - 1.0;
             buffer[pixelIndex * inputChannels + 2] = (b / 127.5) - 1.0;
-          } else {
-            // Normalize [0, 255] to [0, 1]
-            buffer[pixelIndex * inputChannels] = r / 255.0;
-            buffer[pixelIndex * inputChannels + 1] = g / 255.0;
-            buffer[pixelIndex * inputChannels + 2] = b / 255.0;
           }
-
           pixelIndex++;
         }
       }

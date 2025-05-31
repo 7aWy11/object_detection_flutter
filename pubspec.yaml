@@ -1,0 +1,32 @@
+name: object_detection_flutter
+description: A high-performance Flutter package for real-time, multi-model (object detection, classification, pose, face, YOLOv5) vision tasks using TensorFlow Lite with isolate support.
+version: 0.1.0 # Start with a pre-release version like 0.1.0 or 1.0.0-beta.1 if you prefer
+homepage: https://github.com/yourusername/object_detection_flutter # UPDATE THIS
+repository: https://github.com/yourusername/object_detection_flutter # Good to add
+issue_tracker: https://github.com/yourusername/object_detection_flutter/issues # Good to add
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0" # Consider setting a more recent stable Flutter version if you use newer features. 3.0.0 is fine but older.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tflite_flutter: ^0.11.0 # Or consider ^0.10.4 if 0.11.0 is newer/less stable for some users initially
+  image: ^4.1.7
+  path_provider: ^2.1.2 # This is used in your Classifier for loading model from assets via temp file.
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.1
+
+# Flutter specific section
+flutter:
+  # Packages that publish assets as part of their API should generally NOT include
+  # them in the package's own assets section unless they are truly fundamental
+  # examples FOR THE PACKAGE ITSELF, not for end-users to directly depend on.
+  # Users of your package will add THEIR OWN model.tflite and labels.txt to THEIR app's assets.
+  # assets:
+  #   - assets/ # If you have example assets for documentation, maybe, but generally not for the package API.

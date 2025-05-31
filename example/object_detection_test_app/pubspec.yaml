@@ -1,0 +1,33 @@
+name: object_detection_test_app
+description: A Flutter app to test the object_detection_flutter package. # Slightly more accurate description
+
+publish_to: 'none' # Correct, as this is an example app.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0' # Match the package's minimum SDK or be higher
+  flutter: ">=3.10.0" # Match the package's minimum Flutter or be higher
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6 # Only if you actually use them. If not, remove.
+
+  object_detection_flutter:
+    path: ../../
+
+  image: ^4.1.7 # Your test app directly uses imageLib for creating test images
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # These are the specific assets USED BY THIS TEST APP. This is correct.
+    - assets/model.tflite
+    - assets/labels.txt
